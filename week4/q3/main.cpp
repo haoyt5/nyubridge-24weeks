@@ -13,7 +13,7 @@ int main() {
 
     for (int i = 0; input / pow(2, i) >= 1; i++) {
         int remainder = int(input / pow(2, i)) % 2;
-        cout << remainder<<endl;
+        cout << remainder << endl;
         result = result + (int) pow(10, i) * remainder;
     }
 
