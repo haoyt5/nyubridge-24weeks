@@ -10,9 +10,10 @@ int main() {
     cin >> input;
 
     int result = 0;
-    int length = 1 + (int) sqrt(input);
-    for (int i = 0; i < length; i++) {
+
+    for (int i = 0; input / pow(2, i) >= 1; i++) {
         int remainder = int(input / pow(2, i)) % 2;
+        cout << remainder<<endl;
         result = result + (int) pow(10, i) * remainder;
     }
 
