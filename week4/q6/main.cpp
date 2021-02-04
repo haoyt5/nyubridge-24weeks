@@ -8,8 +8,8 @@ int main() {
 
     int input;
     cout << "Please input a positive integer n: ";
-
     cin >> input;
+
     for (int i = 1; i <= input; i++) {
         int evenDigitCount = 0;
         int oddDigitCount = 0;
@@ -22,6 +22,7 @@ int main() {
                 oddDigitCount += 1;
             }
         }
+
         if (evenDigitCount > oddDigitCount) {
             cout << i << endl;
         }
