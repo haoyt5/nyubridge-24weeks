@@ -4,7 +4,8 @@
 using namespace std;
 
 int main() {
-
+    cout << fixed;
+    cout.precision(4);
     cout << "section a" << endl;
     int sequenceLength;
     cout << "Please enter the length of the sequence: ";
@@ -24,18 +25,18 @@ int main() {
 
     cout << "" << endl;
     cout << "section b" << endl;
-    int input;
+    int continueInput = 1;
     cout
             << "Please enter a non-empty sequence of positive integers, each one in a separate line. End your sequence by typing -1:"
             << endl;
     sequenceLength = 0;
     product = 1;
-    while (input != -1) {
-        cin >> input;
-        if (input == -1) {
+    while (continueInput != -1) {
+        cin >> continueInput;
+        if (continueInput == -1) {
             break;
         }
-        product = product * input;
+        product = product * continueInput;
         sequenceLength = sequenceLength + 1;
     }
     exponent = (double) 1 / sequenceLength;
