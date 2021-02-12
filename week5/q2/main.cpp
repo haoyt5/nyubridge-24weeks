@@ -3,17 +3,20 @@
 #include <ctime>
 
 using namespace std;
-int TOTAL_GUESS_CHANCE = 5;
+const int TOTAL_GUESS_CHANCE = 5;
 
 int main() {
     int answer;
-    srand(time(0));
-    answer = (rand() % 100) + 1;
+    srand(time(0)); // NOLINT
+    answer = (rand() % 100) + 1; // NOLINT
+
     int minNumber = 1;
     int maxNumber = 100;
     int guessCount = 5;
     int guess;
+
     cout << "I thought of a number between 1 and 100! Try to guess it." << endl;
+
     for (int chanceCount = 1; chanceCount <= TOTAL_GUESS_CHANCE; chanceCount++) {
         cout << "Range: [" << minNumber << "," << maxNumber << "], Number of guesses left: " << guessCount << endl;
         cout << "Your guess: ";
@@ -24,7 +27,7 @@ int main() {
             return 0;
         }
 
-        if (guess == answer && chanceCount < TOTAL_GUESS_CHANCE) {
+        if (guess == answer) {
             cout << "Congrats! You guessed my number in " << chanceCount << " guesses." << endl;
             return 0;
         }
