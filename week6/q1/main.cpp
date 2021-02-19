@@ -15,13 +15,11 @@ int main() {
     cin >> ordinal;
 
     if (ordinal > 2) {
-
         ordinalElement = fibonacci(ordinal, ORDINAL_FIRST_AND_SECOND, ORDINAL_FIRST_AND_SECOND);
-
         cout << ordinalElement << endl;
         return 0;
     }
-    if (ordinal < 3 and ordinal > 0) {
+    if (ordinal < 3 && ordinal > 0) {
         cout << ORDINAL_FIRST_AND_SECOND << endl;
         return 0;
     }
