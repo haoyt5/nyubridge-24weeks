@@ -8,6 +8,10 @@ int main() {
     int inputNumber;
     cout << "Please enter a positive integer >=2: ";
     cin >> inputNumber;
+    if(inputNumber < 2){
+        cout << "Input invalid" << endl;
+        return 0;
+    }
     printDivisors(inputNumber);
     return 0;
 }
