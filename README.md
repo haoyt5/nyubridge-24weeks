@@ -6,3 +6,4 @@
 - Week 5
 - Week 6
 - week 7
+- week 8
