@@ -16,7 +16,6 @@ void countAlphabet(const string &sentence, int (&countArray)[26]);
 
 bool compareCountArray(int (&firstCountArray)[26], int (&secondCountArray)[26]);
 
-//void readArray(int (&countArray)[26]);
 
 int main() {
     string firstSentence;
@@ -27,11 +26,13 @@ int main() {
     getline(cin, firstSentence);
     cout << "Please enter the second one: " << endl;
     getline(cin, secondSentence);
+
     cout << "\"" << firstSentence << "\" is ";
     if (!isAnagrams(firstSentence, secondSentence)) {
         cout << "not ";
     }
     cout << "an anagram of \"" << secondSentence << "\"" << endl;
+
     return 0;
 }
 
@@ -58,10 +59,10 @@ bool isAnagrams(const string &firstSentence, const string &secondSentence) {
     bool isAnagrams = false;
     int countFirstArray[26] = {0};
     int countSecondArray[26] = {0};
+
     countAlphabet(firstSentence, countFirstArray);
     countAlphabet(secondSentence, countSecondArray);
-//    readArray(countFirstArray);
-//    readArray(countSecondArray);
+
     if (compareCountArray(countFirstArray, countSecondArray)) {
         isAnagrams = true;
     }
@@ -92,14 +93,3 @@ bool compareCountArray(int (&firstCountArray)[26], int (&secondCountArray)[26]) 
     }
     return isSame;
 }
-
-//void readArray(int (&countArray)[26]) {
-//    cout << endl;
-//    for (int i = 0; i < 26; i++) {
-//        if (countArray[i] != 0) {
-//            cout << char(i + lowerCaseA) << " ";
-//            cout << countArray[i] << " ";
-//        }
-//    }
-//    cout << endl;
-//}
