@@ -20,9 +20,7 @@ int main() {
     wordsArray = createWordsArray(SENTENCE, outWordsArrSize);
 
     readArray(wordsArray, outWordsArrSize);
-
-    delete[]wordsArray;
-
+    delete[] wordsArray;
     return 0;
 }
 

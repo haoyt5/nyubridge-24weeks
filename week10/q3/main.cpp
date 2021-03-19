@@ -81,5 +81,4 @@ void readIndexInVector(vector<int> inputArray, int searchValue) {
         }
     }
     cout << "." << endl;
-
 }
