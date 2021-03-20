@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int *findMissing(const int arr[], int n, int &resArrSize);
+int *findMissing(int arr[], int n, int &resArrSize);
 
 void readArray(int *arr, int arraySize);
 
@@ -18,7 +18,7 @@ int main() {
     return 0;
 }
 
-int *findMissing(const int arr[], int n, int &resArrSize) {
+int *findMissing(int arr[], int n, int &resArrSize) {
     int *numberArray;
     numberArray = new int[n];
     for (int i = 0; i < n; i++) {
