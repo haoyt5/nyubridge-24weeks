@@ -4,7 +4,7 @@ using namespace std;
 
 void readArray(int arr[], int arrSize);
 
-int lowestCostOfJumpIt(int arr[], int arrSize);
+int visitCost(int arr[], int arrSize);
 
 int main() {
     int arr[6] = {0, 3, 80, 6, 57, 10};
@@ -12,7 +12,7 @@ int main() {
 
     cout << "The sample game board where n is " << arrSize << ": " << endl;
     readArray(arr, arrSize);
-    int lowestCost = lowestCostOfJumpIt(arr, arrSize);
+    int lowestCost = visitCost(arr, arrSize);
     cout << "\nThe lowest cost of the sequence is: " << lowestCost << endl;
     return 0;
 }
@@ -26,16 +26,17 @@ void readArray(int arr[], int arrSize) {
     }
 }
 
-int lowestCostOfJumpIt(int arr[], int arrSize) {
-    int jumpIndex = arrSize - 1;
-    if (arrSize <= 1) {
-        return 0;
+int visitCost(int arr[], int arrSize) {
+    int visitedIndex = arrSize - 1;
+    if (arrSize <= 3) {
+        return arr[visitedIndex];
     } else {
-        int cheaper = arr[jumpIndex];
-        if (arr[jumpIndex - 1] < cheaper) {
-            jumpIndex--;
-            cheaper = arr[jumpIndex];
+        int costMove = visitCost(arr, arrSize - 1);
+        int costJump = visitCost(arr, arrSize - 2);
+        if (costMove < costJump) {
+            return arr[visitedIndex] + costMove;
+        } else {
+            return arr[visitedIndex] + costJump;
         }
-        return cheaper + lowestCostOfJumpIt(arr, jumpIndex);
     }
 }
