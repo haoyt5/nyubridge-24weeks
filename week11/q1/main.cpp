@@ -10,21 +10,21 @@ void printRuler(int n);
 
 int main() {
     const int number = 4;
-
-    cout << "a. print Triangle" << endl;
+    cout << "n=" << number << endl;
+    cout << "a. print triangle" << endl;
     printTriangle(number);
 
-    cout << "\nb. print Opposite Triangles" << endl;
+    cout << "\nb. print opposite triangles" << endl;
     printOpositeTriangles(number);
 
-    cout << "\nc. print Ruler" << endl;
+    cout << "\nc. print ruler" << endl;
     printRuler(number);
 
     return 0;
 }
 
 void printTriangle(int n) {
-    if (n == 0) {
+    if (n < 1) {
         return;
     }
     printTriangle(n - 1);
@@ -35,7 +35,7 @@ void printTriangle(int n) {
 }
 
 void printOpositeTriangles(int n) {
-    if (n == 0) {
+    if (n < 1) {
         return;
     }
     for (int i = 0; i < n; i++) {
@@ -50,7 +50,7 @@ void printOpositeTriangles(int n) {
 }
 
 void printRuler(int n) {
-    if (n == 0) {
+    if (n < 1) {
         return;
     }
     printRuler(n - 1);
