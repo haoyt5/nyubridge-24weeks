@@ -11,12 +11,15 @@ void readArray(int arr[], int arrSize);
 int main() {
     int array[4] = {2, -1, 3, 10};
     int arraySize = 4;
+
     cout << "Array: [";
     readArray(array, arraySize);
     cout << "]" << endl;
+
     cout << "a. sumOfSquares:" << endl;
     int result = sumOfSquares(array, arraySize);
     cout << result << endl;
+
     cout << "b. isSorted:" << endl;
     bool isSort = isSorted(array, arraySize);
     cout << std::boolalpha << isSort << endl;
