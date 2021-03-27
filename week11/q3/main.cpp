@@ -24,25 +24,26 @@ int minInArray1(int arr[], int arrSize) {
         minValue = arr[0];
         return minValue;
     } else {
+        int nextMinValue = minInArray1(arr, arrSize - 1);
         minValue = arr[arrSize - 1];
-        if (minValue > arr[arrSize - 2]) {
-            minValue = arr[arrSize - 2];
+        if (minValue > nextMinValue) {
+            minValue = nextMinValue;
         }
         return minValue;
     }
 }
 
 int minInArray2(int arr[], int low, int high) {
-    int minValue;
     int arrSize = high - low + 1;
     if (arrSize == 1) {
+        int minValue;
         minValue = arr[low];
         return minValue;
     } else {
-        minValue = arr[high - 1];
-        if (minValue > arr[high - 2]) {
-            minValue = arr[high - 2];
+        if (arr[low] > arr[high]) {
+            return minInArray2(arr, low + 1, high);
+        } else {
+            return minInArray2(arr, low, high - 1);
         }
-        return minValue;
     }
 }
