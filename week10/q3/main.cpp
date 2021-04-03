@@ -18,6 +18,15 @@ int main() {
     return 0;
 }
 
+void resizeArray(int *&arr, int currentSize, int newSize) {
+    int *temp = new int[newSize];
+    for (int i = 0; i < currentSize; i++) {
+        temp[i] = arr[i];
+    }
+    delete[] arr;
+    arr = temp;
+}
+
 int main1() {
     cout << "Please enter a sequence of positive integers, each in a separate line." << endl;
     cout << "End you input by typing -1." << endl;
@@ -27,6 +36,7 @@ int main1() {
     while (currentInput != -1) {
         cin >> currentInput;
         inputArray[size - 1] = currentInput;
+        resizeArray(inputArray, size, size * 2);
         size++;
     }
     int searchValue;
