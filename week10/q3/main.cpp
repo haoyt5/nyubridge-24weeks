@@ -12,6 +12,8 @@ void readIndexInVector(vector<int> inputArray, int searchValue);
 
 void readIndexInDynamicArray(const int *inputArray, int inputArraySize, int searchValue);
 
+void resizeArray(int *&arr, int currentSize, int newSize);
+
 int main() {
     main1();
     main2();
@@ -26,6 +28,7 @@ void resizeArray(int *&arr, int currentSize, int newSize) {
     delete[] arr;
     arr = temp;
 }
+
 
 int main1() {
     cout << "Please enter a sequence of positive integers, each in a separate line." << endl;
