@@ -1,5 +1,4 @@
 # Week 12
-
 ## Agenda
 
 This week we will be studying object oriented programming including the design of classes, constructors, destructors, copy constructors, operator overloading (including the assignment operator), inheritance and polymorphism. 
@@ -29,3 +28,106 @@ CH12 #7: Write a checkbook balancing program. The program will read in, from the
 well as constructors and functions for both input and output of a check.  In addition to the checks, the program also reads all the deposits (from the console; cin), the old and the new account balance (read this in from the user at the console; cin). You may want another array to hold the deposits. The new account balance should be the old balance plus all deposits, minus all checks that have been cashed.
 
 The program outputs the total of the checks cashed, the total of the deposits, what the new balance should be, and how much this figure differs from what the bank says the new balance is. It also outputs two lists of checks: the checks cashed since the last time you balanced your checkbook and the checks still not cashed. [ edit: if you can, Display both lists of checks in sorted order from lowest to highest check number.]
+
+## Module 15 Object Oriented Programming
+### Accessors and Mutators
+- Accessors (Getter): are used to get information out of the class.
+- Mutators (Setter): are used to put information into the class. (Can change data)
+- Example creating three functions here that will act as the mutators; so we've got the set day, set month, and set year function:
+    - all three functions are members of the class 
+    - idea of encapsulation:  members of the class will have access to the private information inside the class
+
+```c++
+class Date {
+private:
+    int day;
+    int month;
+    int year;
+public:
+    void setDay(int newDay);  // mutator
+
+    void setMonth(int newMonth); // mutator
+
+    void setYear(int newYear) { year = newYear; }; // mutator
+    void displayDate() const{
+        cout << day <<"/"<<month <<"/" << year;
+    }; // m
+};
+
+void Date::setDay(int newDay) {
+    if (newDay > 0 && newDay <= 31) {
+        day = newDay;
+    }
+}
+
+void Date::setMonth(int newMonth) {
+    if (newMonth > 0 && newMonth <= 12) {
+        month = newMonth;
+    }
+}
+// Creating and working with an object
+int main() {
+    Date d1;
+    d1.setDay(6);
+    d1.setMonth(8);
+    d1.setYear(1991);
+
+    cout<<"very important date: ";
+    d1.displayDate();
+}
+```
+
+### Constructor 
+- constructor are the functions automatically called when the funciton is created
+- the default constructor is a function named exactly the same as the name of the class with no return type and no parameter
+#### constructor parts
+```c++
+class Date1 {
+private:
+    int day;
+    int month;
+    int year;
+public:
+    Date1() : day(6), month(8), year(1991) {};  // Member initialization list
+};
+
+class Date2 {
+private:
+    int day;
+    int month;
+    int year;
+public:
+    Date2() {
+        day = 6;
+        month = 8;
+        year = 1991;
+    };
+};
+```
+
+```c++
+class Date {
+private:
+    int day;
+    int month;
+    int year;
+public:
+    void displayDate() const {
+        cout << day << "/" << month << "/" << year;
+    }; // const-ified function
+    Date(int newD, int newM, int newY) : day(newD), month(newM), year(newY) {}; 
+
+};
+
+int main() {
+    Date d2(6, 8, 1991);
+    cout << "very important date: ";
+    d2.displayDate();
+}
+```
+
+### An important Pointer: this
+- Every object has a pointer, which looks like a data member, called "this".
+```c++
+    void setYear(int newYear) { this->year = newYear; };
+```
