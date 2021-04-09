@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -36,14 +37,29 @@ private:
 int digitToInt(char c);
 
 int main() {
+    Money oldAmount;
+    Money newAmount;
+    int numberOfDeposit;
+
+    cout << "Please enter your existing(old) bank balance ($##.##): ";
+    cin >> oldAmount;
+
+    cout << "Please enter your new bank balance ($##.##): ";
+    cin >> newAmount;
+
+    cout << "Please enter how many deposits you have (#): ";
+    cin >> numberOfDeposit;
+
+    cout << "Please enter deposit ($##.##) one per line): " << endl;
+    vector<Money> deposits;
+    for (int i = 0; i < numberOfDeposit; i++) {
+        Money depositAmount;
+        cin >> depositAmount;
+        deposits.push_back(depositAmount);
+    }
 
 
-    Money money = Money();
-    Money money2 = Money(10, 10);
-    Money money3 = Money(10);
-    cout << money.getValue() << endl;
-    cout << money2.getValue() << endl;
-    cout << money3.getValue() << endl;
+    cout << oldAmount.getValue() << " " << newAmount.getValue() << " " << numberOfDeposit << " " << deposits[0].getValue();
     return 0;
 }
 
