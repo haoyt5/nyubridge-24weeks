@@ -24,12 +24,13 @@ By the end of this week, you should:
 
 ## Assignment
 
-CH12 #7: Write a checkbook balancing program. The program will read in, from the console, the following for all checks that were not cashed as of the last time you balanced your checkbook: the number of each check (int), the amount of the check (double), and whether or not it has been cashed (1 or 0, boolean in the array). Use an array with the class as the type. The class should be a class for a check. There should be three member variables to record the check number, the check amount, and whether or not the check was cashed. The class for a check will have a member variable of type Money (as defined on page 662 in the book; Display 11.9) to record the check amount. So, you will have a class used within a class. The class for a check should have accessor and mutator functions as 
+CH11 #7 (page 698): Write a checkbook balancing program. The program will read in, from the console, the following for all checks that were not cashed as of the last time you balanced your checkbook: the number of each check (int), the amount of the check (double), and whether or not it has been cashed (1 or 0, boolean in the array). Use an array with the class as the type. The class should be a class for a check. There should be three member variables to record the check number, the check amount, and whether or not the check was cashed. The class for a check will have a member variable of type Money (as defined on page 662 in the book; Display 11.9) to record the check amount. So, you will have a class used within a class. The class for a check should have accessor and mutator functions as 
 well as constructors and functions for both input and output of a check.  In addition to the checks, the program also reads all the deposits (from the console; cin), the old and the new account balance (read this in from the user at the console; cin). You may want another array to hold the deposits. The new account balance should be the old balance plus all deposits, minus all checks that have been cashed.
 
 The program outputs the total of the checks cashed, the total of the deposits, what the new balance should be, and how much this figure differs from what the bank says the new balance is. It also outputs two lists of checks: the checks cashed since the last time you balanced your checkbook and the checks still not cashed. [ edit: if you can, Display both lists of checks in sorted order from lowest to highest check number.]
 
 ## Module 15 Object Oriented Programming
+
 ### Accessors and Mutators
 - Accessors (Getter): are used to get information out of the class.
 - Mutators (Setter): are used to put information into the class. (Can change data)
@@ -51,7 +52,7 @@ public:
     void setYear(int newYear) { year = newYear; }; // mutator
     void displayDate() const{
         cout << day <<"/"<<month <<"/" << year;
-    }; // m
+    }; 
 };
 
 void Date::setDay(int newDay) {
@@ -78,7 +79,7 @@ int main() {
 ```
 
 ### Constructor 
-- constructor are the functions automatically called when the funciton is created
+- A constructor is a (public) member function automatically called when the object of the class is declared
 - the default constructor is a function named exactly the same as the name of the class with no return type and no parameter
 #### constructor parts
 ```c++
@@ -88,7 +89,7 @@ private:
     int month;
     int year;
 public:
-    Date1() : day(6), month(8), year(1991) {};  // Member initialization list
+    Date1() : day(6), month(8), year(1991) {};  // constructor: Member initialization list
 };
 
 class Date2 {
@@ -101,7 +102,7 @@ public:
         day = 6;
         month = 8;
         year = 1991;
-    };
+    };  // constructor
 };
 ```
 
@@ -115,7 +116,7 @@ public:
     void displayDate() const {
         cout << day << "/" << month << "/" << year;
     }; // const-ified function
-    Date(int newD, int newM, int newY) : day(newD), month(newM), year(newY) {}; 
+    Date(int newD, int newM, int newY) : day(newD), month(newM), year(newY) {};   // constructor
 
 };
 
