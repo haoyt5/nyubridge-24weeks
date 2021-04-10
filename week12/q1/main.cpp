@@ -62,7 +62,9 @@ private:
 
 int digitToInt(char c);
 
-void resizeArray(Money *&arr, int currentSize, int newSize);
+void resizeMoneyArray(Money *&arr, int currentSize, int newSize);
+
+void resizeCheckArray(Check *&arr, int currentSize, int newSize);
 
 int main() {
     Money oldAmount;
@@ -88,22 +90,23 @@ int main() {
         Money depositAmount;
         cin >> depositAmount;
         depositArr[resArrSize - 1] = depositAmount;
-        resizeArray(depositArr, resArrSize, resArrSize * 2);
+        resizeMoneyArray(depositArr, resArrSize, resArrSize * 2);
         resArrSize++;
     }
 
 
     int numberOfCheck;
-    resArrSize = 1;
-    Check *checkArr = new Check[resArrSize];
+    int checkResArrSize = 1;
+    Check *checkArr = new Check[checkResArrSize];
+
 
     cout << endl;
     cout << "Please enter how many checks you have for processing (#): ";
     cin >> numberOfCheck;
-    cout << "*The format of the check input per line is (# $##.## #), each unit separate by a space, " << endl;
-    cout << "\t- The first unit is the check number (#)," << endl;
-    cout << "\t- The second unit is the check amount ($##.##)," << endl;
-    cout << "\t- The third unit is whether checked or not, 0 if not chased, 1 if cashed (#)," << endl;
+    cout << "*The format of the check input per line is (# $##.## #), with space between the detail items " << endl;
+    cout << "\t- The first position is the check number (#)," << endl;
+    cout << "\t- The second position is the check amount ($##.##)," << endl;
+    cout << "\t- The third position is whether checked or not, 0 if not chased, 1 if cashed (#)," << endl;
     cout << "Please enter checks (# $##.## #) one per line:" << endl;
 
     for (int i = 0; i < numberOfCheck; i++) {
@@ -117,12 +120,58 @@ int main() {
         checkItem.setCheckAmount(checkAmount);
         checkItem.setHaveCashed(checkHaveCashed);
 
-        checkArr[resArrSize - 1] = checkItem;
-        resizeArray(depositArr, resArrSize, resArrSize * 2);
-        resArrSize++;
+        checkArr[checkResArrSize - 1] = checkItem;
+        resizeCheckArray(checkArr, checkResArrSize, checkResArrSize * 2);
+        checkResArrSize++;
     }
 
+    Money totalDepositValue;
+    Money totalCashedCheckValue;
 
+    for (int i = 0; i < numberOfDeposit; i++) {
+        totalDepositValue = totalDepositValue + depositArr[i].getValue();
+    }
+
+    for (int i = 0; i < numberOfCheck; i++) {
+        if (checkArr[i].getHaveCashed()) {
+            totalCashedCheckValue = totalCashedCheckValue + checkArr[i].getCheckAmount();
+        }
+    }
+    cout << endl;
+
+    cout << "The total value of the deposits you made is: " << totalDepositValue << endl;
+    cout << "The total value of the cashed check is: " << totalCashedCheckValue << endl;
+    cout << endl;
+    Money updateBalance = oldAmount + totalDepositValue - totalCashedCheckValue;
+    Money diffBalance = updateBalance - newAmount;
+
+    cout << "The new balance by input is: " << updateBalance << endl;
+
+    cout << "The difference from the bank balance is : " << diffBalance << endl;
+    cout << endl;
+
+    cout << "List of all cashed checks : " << endl;
+    cout << "ID\tAmount\t Cashed Status" << endl;
+    for (int i = 0; i < checkResArrSize; i++) {
+        if (checkArr[i].getHaveCashed() && checkArr[i].getCheckNumber()) {
+            int number = checkArr[i].getCheckNumber();
+            Money amount = checkArr[i].getCheckAmount();
+            bool cashed = checkArr[i].getHaveCashed();
+            cout << number << "\t" << amount << "\t" << cashed << endl;
+        }
+    }
+    cout << endl;
+
+    cout << "List of all non-cashed checks : " << endl;
+    cout << "ID\tAmount\t Cashed Status" << endl;
+    for (int i = 0; i < checkResArrSize; i++) {
+        if (!checkArr[i].getHaveCashed() && checkArr[i].getCheckNumber()) {
+            int number = checkArr[i].getCheckNumber();
+            Money amount = checkArr[i].getCheckAmount();
+            bool cashed = checkArr[i].getHaveCashed();
+            cout << number << "\t" << amount << "\t" << cashed << endl;
+        }
+    }
     return 0;
 }
 
@@ -130,8 +179,17 @@ int digitToInt(char c) {
     return (static_cast<int>(c) - static_cast<int>('0'));
 }
 
-void resizeArray(Money *&arr, int currentSize, int newSize) {
+void resizeMoneyArray(Money *&arr, int currentSize, int newSize) {
     Money *temp = new Money[newSize];
+    for (int i = 0; i < currentSize; i++) {
+        temp[i] = arr[i];
+    }
+    delete[] arr;
+    arr = temp;
+}
+
+void resizeCheckArray(Check *&arr, int currentSize, int newSize) {
+    Check *temp = new Check[newSize];
     for (int i = 0; i < currentSize; i++) {
         temp[i] = arr[i];
     }
