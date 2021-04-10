@@ -129,7 +129,7 @@ int main() {
     Money totalCashedCheckValue;
 
     for (int i = 0; i < numberOfDeposit; i++) {
-        totalDepositValue = totalDepositValue + depositArr[i].getValue();
+        totalDepositValue = totalDepositValue + depositArr[i];
     }
 
     for (int i = 0; i < numberOfCheck; i++) {
@@ -151,7 +151,7 @@ int main() {
     cout << endl;
 
     cout << "List of all cashed checks : " << endl;
-    cout << "ID\tAmount\t Cashed Status" << endl;
+    cout << "ID" << "\t" << "Amount" << "\t" << "Cashed Status" << endl;
     for (int i = 0; i < checkResArrSize; i++) {
         if (checkArr[i].getHaveCashed() && checkArr[i].getCheckNumber()) {
             int number = checkArr[i].getCheckNumber();
@@ -163,7 +163,7 @@ int main() {
     cout << endl;
 
     cout << "List of all non-cashed checks : " << endl;
-    cout << "ID\tAmount\t Cashed Status" << endl;
+    cout << "ID" << "\t" << "Amount" << "\t" << "Cashed Status" << endl;
     for (int i = 0; i < checkResArrSize; i++) {
         if (!checkArr[i].getHaveCashed() && checkArr[i].getCheckNumber()) {
             int number = checkArr[i].getCheckNumber();
