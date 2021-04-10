@@ -1,10 +1,11 @@
 #include <iostream>
-#include <vector>
+
 
 using namespace std;
 
 class Money;
 
+class Check;
 
 class Money {
 public:
@@ -34,7 +35,21 @@ private:
     long allCents;
 };
 
+class Check {
+public:
+    Check();
+
+    Check(int checkNumber, Money checkAmount, bool haveCashed);
+
+private:
+    int checkNumber;
+    Money checkAmount;
+    bool haveCashed;
+};
+
 int digitToInt(char c);
+
+void resizeArray(Money *&arr, int currentSize, int newSize);
 
 int main() {
     Money oldAmount;
@@ -50,21 +65,45 @@ int main() {
     cout << "Please enter how many deposits you have (#): ";
     cin >> numberOfDeposit;
 
-    cout << "Please enter deposit ($##.##) one per line): " << endl;
-    vector<Money> deposits;
+    cout << "Please enter deposit ($##.##) one per line: " << endl;
+
+    int resArrSize = 1;
+    Money *depositArr = new Money[resArrSize];
+
     for (int i = 0; i < numberOfDeposit; i++) {
         Money depositAmount;
         cin >> depositAmount;
-        deposits.push_back(depositAmount);
+        depositArr[resArrSize - 1] = depositAmount;
+        resizeArray(depositArr, resArrSize, resArrSize * 2);
+        resArrSize++;
     }
 
 
-    cout << oldAmount.getValue() << " " << newAmount.getValue() << " " << numberOfDeposit << " " << deposits[0].getValue();
+    int numberOfCheck;
+
+    cout << endl;
+    cout << "Please enter how many checks you have for processing (#): ";
+    cin >> numberOfCheck;
+    cout << "*The format of the check input per line is (# $##.## #)" << endl;
+    cout << "\t- The first position is the check number (#)," << endl;
+    cout << "\t- The second position is the check amount ($##.##)," << endl;
+    cout << "\t- The third position is whether checked or not, 0 if not chased, 1 if cashed (#)," << endl;
+    cout << "Please enter checks (# $##.## #) one per line:" << endl;
+
     return 0;
 }
 
 int digitToInt(char c) {
     return (static_cast<int>(c) - static_cast<int>('0'));
+}
+
+void resizeArray(Money *&arr, int currentSize, int newSize) {
+    Money *temp = new Money[newSize];
+    for (int i = 0; i < currentSize; i++) {
+        temp[i] = arr[i];
+    }
+    delete[] arr;
+    arr = temp;
 }
 
 Money::Money(long dollars, int cents) {
@@ -161,3 +200,6 @@ ostream &operator<<(ostream &outs, Money &amount) {
     outs << cents;
     return outs;
 }
+
+//Check();
+//Check(int checkNumber, Money checkAmount, bool haveCashed);
