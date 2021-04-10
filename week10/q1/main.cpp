@@ -9,6 +9,8 @@ void readArray(string *arr, int arraySize);
 
 bool isAlphabet(char input);
 
+void resizeArray(string *&arr, int currentSize, int newSize);
+
 int main() {
     const string SENTENCE = "You can do it";
 
@@ -22,9 +24,18 @@ int main() {
     return 0;
 }
 
+void resizeArray(string *&arr, int currentSize, int newSize) {
+    string *temp = new string[newSize];
+    for (int i = 0; i < currentSize; i++) {
+        temp[i] = arr[i];
+    }
+    delete[] arr;
+    arr = temp;
+}
+
 string *createWordsArray(const string &sentence, int &outWordsArrSize) {
 
-    auto *dynamicArray = new string[outWordsArrSize];
+    string *dynamicArray = new string[outWordsArrSize];
 
     int wordLength = sentence.find(' ');
     string restSentence = sentence;
@@ -33,8 +44,10 @@ string *createWordsArray(const string &sentence, int &outWordsArrSize) {
     while (wordLength != -1 && isAlphabet(restSentence[0])) {
         if (outWordsArrSize == 0) {
             outWordsArrSize = 1;
+            resizeArray(dynamicArray, outWordsArrSize, outWordsArrSize * 2);
         } else {
             outWordsArrSize++;
+            resizeArray(dynamicArray, outWordsArrSize, outWordsArrSize * 2);
         }
 
         dynamicArray[outWordsArrSize - 1] = restSentence.substr(0, wordLength);
