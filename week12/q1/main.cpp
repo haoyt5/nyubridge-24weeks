@@ -37,9 +37,22 @@ private:
 
 class Check {
 public:
-    Check();
 
     Check(int checkNumber, Money checkAmount, bool haveCashed);
+
+    Check();
+
+    int getCheckNumber() const;
+
+    Money getCheckAmount() const;
+
+    bool getHaveCashed() const;
+
+    void setCheckNumber(int inputNumber);
+
+    void setCheckAmount(Money inputAmount);
+
+    void setHaveCashed(char inputCashedChar);
 
 private:
     int checkNumber;
@@ -65,10 +78,11 @@ int main() {
     cout << "Please enter how many deposits you have (#): ";
     cin >> numberOfDeposit;
 
-    cout << "Please enter deposit ($##.##) one per line: " << endl;
-
     int resArrSize = 1;
     Money *depositArr = new Money[resArrSize];
+
+    cout << "Please enter deposit ($##.##) one per line: " << endl;
+
 
     for (int i = 0; i < numberOfDeposit; i++) {
         Money depositAmount;
@@ -80,15 +94,34 @@ int main() {
 
 
     int numberOfCheck;
+    resArrSize = 1;
+    Check *checkArr = new Check[resArrSize];
 
     cout << endl;
     cout << "Please enter how many checks you have for processing (#): ";
     cin >> numberOfCheck;
-    cout << "*The format of the check input per line is (# $##.## #)" << endl;
-    cout << "\t- The first position is the check number (#)," << endl;
-    cout << "\t- The second position is the check amount ($##.##)," << endl;
-    cout << "\t- The third position is whether checked or not, 0 if not chased, 1 if cashed (#)," << endl;
+    cout << "*The format of the check input per line is (# $##.## #), each unit separate by a space, " << endl;
+    cout << "\t- The first unit is the check number (#)," << endl;
+    cout << "\t- The second unit is the check amount ($##.##)," << endl;
+    cout << "\t- The third unit is whether checked or not, 0 if not chased, 1 if cashed (#)," << endl;
     cout << "Please enter checks (# $##.## #) one per line:" << endl;
+
+    for (int i = 0; i < numberOfCheck; i++) {
+        Check checkItem;
+        int checkNumber;
+        Money checkAmount;
+        char checkHaveCashed;
+        cin >> checkNumber >> checkAmount >> checkHaveCashed;
+
+        checkItem.setCheckNumber(checkNumber);
+        checkItem.setCheckAmount(checkAmount);
+        checkItem.setHaveCashed(checkHaveCashed);
+
+        checkArr[resArrSize - 1] = checkItem;
+        resizeArray(depositArr, resArrSize, resArrSize * 2);
+        resArrSize++;
+    }
+
 
     return 0;
 }
@@ -201,5 +234,49 @@ ostream &operator<<(ostream &outs, Money &amount) {
     return outs;
 }
 
-//Check();
-//Check(int checkNumber, Money checkAmount, bool haveCashed);
+
+Check::Check(int id, Money amount, bool cashed) : checkNumber(id), checkAmount(amount), haveCashed(cashed) {
+
+}
+
+Check::Check() : checkNumber(), checkAmount(), haveCashed() {
+
+}
+
+int Check::getCheckNumber() const {
+    return (checkNumber);
+}
+
+Money Check::getCheckAmount() const {
+    return (checkAmount);
+}
+
+bool Check::getHaveCashed() const {
+    return (haveCashed);
+}
+
+void Check::setCheckNumber(int inputNumber) {
+    checkNumber = inputNumber;
+}
+
+void Check::setCheckAmount(Money inputAmount) {
+    checkAmount = inputAmount;
+}
+
+void Check::setHaveCashed(char inputCashedChar) {
+    char one = '1';
+    char zero = '0';
+
+    if (inputCashedChar == one) {
+        haveCashed = true;
+    } else if (inputCashedChar == zero) {
+        haveCashed = false;
+    } else {
+
+        cout << "Illegal values for whether checked" << endl;
+        exit(1);
+
+    }
+
+
+}
