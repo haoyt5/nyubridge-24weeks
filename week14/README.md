@@ -18,3 +18,4 @@ of each half, and then in two additional comparisons produce the maximum and
 minimum for the entire problem.
 
 Write the above function which will take in a vector and solve the problem, producing a vector of two elements, the min and max.
+
